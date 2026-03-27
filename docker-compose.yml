@@ -1,0 +1,58 @@
+# =============================================================
+# LLM Based Code Debugger and Analyser — Docker Setup
+# =============================================================
+# Only Redis, RedisInsight and Frontend run in Docker.
+# Backend runs locally with: uvicorn backend.app:app --host 0.0.0.0 --port 8000
+#
+# URLs:
+#   Frontend:      http://localhost:5173
+#   Backend:       http://localhost:8000  (run locally)
+#   Redis:         localhost:6379
+#   RedisInsight:  http://localhost:5540
+# =============================================================
+
+services:
+
+  redis:
+    image: redis:7-alpine
+    container_name: llm_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - llm_redis_data:/data
+    command: redis-server --appendonly yes
+    restart: unless-stopped
+    networks:
+      - llm_network
+
+  redisinsight:
+    image: redis/redisinsight:latest
+    container_name: llm_redisinsight
+    ports:
+      - "5540:5540"
+    volumes:
+      - llm_redisinsight_data:/data
+    restart: unless-stopped
+    networks:
+      - llm_network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://localhost:8000
+    container_name: llm_frontend
+    ports:
+      - "5173:5173"
+    restart: unless-stopped
+    networks:
+      - llm_network
+
+networks:
+  llm_network:
+    driver: bridge
+
+volumes:
+  llm_redis_data:
+  llm_redisinsight_data:
