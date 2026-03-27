@@ -643,11 +643,8 @@ The LLM JSON was invalid or incomplete. The system automatically fell back to Py
 
 This project was developed as a Major Project for the Bachelor of Technology in Computer Science and Engineering at Gokaraju Rangaraju Institute of Engineering and Technology (GRIET), Hyderabad, 2025–2026.
 
-**Team D12:**
+Team D12:
 - Yerra Nihal (22241A05R8)
-- Chakali Vijay (22241A05L4)
-- Masna Sahith (22241A05N2)
-- Akhil Vipparla (22241A05K7)
-- Jakkana Boina Anudeep (22241A05M2)
+
 
 **Guide:** Dr. K. Butchiraju, Professor & Dean of T&P, Department of CSE
